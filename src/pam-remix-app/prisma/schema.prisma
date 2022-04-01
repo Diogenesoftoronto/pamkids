@@ -14,12 +14,24 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  password Password?
-  postes    Post[]
+  password   Password?
+  postes     Post[]
+  Blog       Blog[]
+  Permission Permission[]
 }
 
 model Password {
   hash String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String @unique
+}
+
+model Permission {
+  edit  Boolean @default(false)
+  post  Boolean @default(false)
+  read  Boolean @default(true)
+  admin Boolean @default(false)
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId String @unique
@@ -38,11 +50,11 @@ model Post {
 }
 
 model Blog {
-  id    String @id @default(cuid())
-  slug String
+  id      String  @id @default(cuid())
+  slug    String
   summary String?
-  title String
-  body  String
+  title   String
+  body    String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -52,35 +64,35 @@ model Blog {
 }
 
 model Patient {
-  id    String @id @default(cuid())
-  first_name String
-  last_name  String
-  date_of_birth DateTime
-  client_sex String
-  medicaid Int @unique
-  health_risks String?
+  id                  String   @id @default(cuid())
+  first_name          String
+  last_name           String
+  date_of_birth       DateTime
+  client_sex          String
+  medicaid            Int      @unique
+  health_risks        String?
   guardian_first_name String?
-  guardian_last_name String?
-  language String @default("english")
+  guardian_last_name  String?
+  language            String   @default("english")
   residential_address String[]
-  city String
-  zip String
-  country  String
-  home_phone Int? 
-  work_phone Int?
-  mobile_phone Int?
-  referral String
-  referral_phone Int
+  city                String
+  zip                 String
+  country             String
+  home_phone          Int?
+  work_phone          Int?
+  mobile_phone        Int?
+  referral            String
+  referral_phone      Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model booking {
-  id    String @id @default(cuid())
+  id           String   @id @default(cuid())
   booking_time DateTime
-  email String
-  name  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  email        String
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
