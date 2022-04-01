@@ -7,7 +7,7 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Admin {
+model User {
   id    String @id @default(cuid())
   email String @unique
 
@@ -15,7 +15,7 @@ model Admin {
   updatedAt DateTime @updatedAt
 
   password Password?
-  notes    Note[]
+  postes    Post[]
 }
 
 model Password {
@@ -39,6 +39,8 @@ model Post {
 
 model Blog {
   id    String @id @default(cuid())
+  slug String
+  summary String?
   title String
   body  String
 
@@ -57,8 +59,6 @@ model Patient {
   client_sex String
   medicaid Int @unique
   health_risks String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
   guardian_first_name String?
   guardian_last_name String?
   language String @default("english")
@@ -71,4 +71,16 @@ model Patient {
   mobile_phone Int?
   referral String
   referral_phone Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model booking {
+  id    String @id @default(cuid())
+  booking_time DateTime
+  email String
+  name  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
