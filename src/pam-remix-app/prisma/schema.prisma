@@ -62,6 +62,13 @@ model Patient {
   guardian_first_name String?
   guardian_last_name String?
   language String @default("english")
-  residential_address Json
- 
+  residential_address String[]
+  city String
+  zip String
+  country  String
+  home_phone Int? 
+  work_phone Int?
+  mobile_phone Int?
+  referral String
+  referral_phone Int
 }
