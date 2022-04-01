@@ -10,14 +10,15 @@ generator client {
 model User {
   id    String @id @default(cuid())
   email String @unique
-
+  avatar String? 
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   password   Password?
-  postes     Post[]
-  Blog       Blog[]
-  Permission Permission[]
+  comments     Comment[]
+  blogs       Blog[]
+  permissions Permission[]
 }
 
 model Password {
@@ -37,7 +38,7 @@ model Permission {
   userId String @unique
 }
 
-model Post {
+model Comment {
   id    String @id @default(cuid())
   body  String
 
